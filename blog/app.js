@@ -7,17 +7,52 @@ var express = require('express')
   , routes = require('./routes')
   , user = require('./routes/user')
   , http = require('http')
-  , mongoose = require('mongoose')
+  , Sequelize = require('sequelize')
   , path = require('path');
 
 var app = express();
 
-mongoose.connect('mongodb://localhost/fuck');
-var db = mongoose.connection;
-db.on('error',console.error.bind(console,'connection error:'));
-db.once('open',function callback () {
-  console.log('fuck');
+var sequelize = new Sequelize('test', 'root', '');
+
+var Project = sequelize.define('Project',{
+  title : Sequelize.STRING,
+  description : Sequelize.TEXT
 });
+
+var Task = sequelize.define('Task',{
+  title: Sequelize.STRING,
+  description: Sequelize.TEXT,
+  deadline: Sequelize.DATE
+});
+
+Project.sync();
+Task.sync();
+
+Project.drop();
+Task.drop();
+
+var project = Project.build({
+  title: 'my awesome project',
+  description: 'woo,fuckfuck', 
+});
+
+project
+  .save()
+  .success(function () {
+    console.log('fuck suc');
+  });
+
+var task = Task.build({
+  title: 'my awesome project',
+  description: 'woo,fuckfuck', 
+  deadline: new Date()
+});
+
+task
+  .save()
+  .success(function () {
+    console.log('fuck suc too!');
+  });
 
 app.configure(function(){
   app.set('port', process.env.PORT || 3000);
