@@ -53,11 +53,11 @@ var  Sequelize = require('sequelize');
 //   });
 
 exports.createTable = function (req,res) {
-	var sequelize = new Sequelize('myblog','root','');
+	var sequelize = new Sequelize('fuck','root','');
 
 	var Blog = sequelize.define('Blog',{
 		// the blog id
-		bid: { type: Sequelize.INTEGER, allowNull: false, autoIncrement: true ,primaryKey: true },
+		id: { type: Sequelize.INTEGER, allowNull: false, autoIncrement: true ,primaryKey: true },
 		// bname
 		btitle: { type: Sequelize.STRING, allowNull: false },
 		// blog Content
@@ -68,7 +68,7 @@ exports.createTable = function (req,res) {
 
 	var User = sequelize.define('User',{
 		// uid
-		uid: { type: Sequelize.INTEGER, allowNull: false ,autoIncrement: true, primaryKey: true },
+		id: { type: Sequelize.INTEGER, allowNull: false ,autoIncrement: true, primaryKey: true },
 		// uname
 		uname: { type: Sequelize.TEXT, allowNull: false, },
 		// register date
@@ -82,47 +82,10 @@ exports.createTable = function (req,res) {
 	Blog.sync();
 	User.sync();
 
-	var blog = Blog.build({
-		btitle: 'this is a title',
-		bcontent: 'this is a Content!',
-		bdate: new Date()
-	});
+	Blog.drop();
+	User.drop();
 
-	var user1 = User.build({
-		uname: 'www',
-		uregDate: new Date()
-	});
-
-	var user2 = User.build({
-		uname: 'www2',
-		uregDate: new Date()
-	});
-
-	blog
-		.save()
-		.success(function () {
-			console.log('blog save suc');
-		});
-
-	user1
-		.save()
-		.success(function () {
-			console.log('user save suc')
-		});	
-	user2
-		.save()
-		.success(function () {
-			console.log('user save suc')
-		});	
-
-	blog
-		.setUsers([user1,user2])	
-		.success(function () {
-			console.log('saved')
-		})
-		.error(function (err) {
-			console.log(err);
-		});
+	
 	// blog.getUsers()
 	// 	.success(function (ascUser) {
 	// 		console.log(ascUser);
@@ -132,7 +95,33 @@ exports.createTable = function (req,res) {
 	sequelize
 		.sync()
 		.success(function () {
-			res.send('createTable ok!');
+			var blog = Blog.build({
+				btitle: 'fuck',
+				bcontent: 'fucking content',
+				bdate: new Date()
+			});
+
+			var user = User.build({
+				uname: 'www',
+				regDate: new Date()
+			});
+
+			var user2 = User.build({
+				uname: 'www2',
+				regDate: new Date()
+			});
+			blog.save();
+			user.save();
+			user2.save();
+
+			blog
+				.setUsers([user,user2])
+				.success(function () {
+					res.send('createTable And InsertData ok!');
+				})
+				.error(function (err) {
+					res.send(err);
+				});
 		})
 		.error(function () {
 			res.send('createTable falied!');	
