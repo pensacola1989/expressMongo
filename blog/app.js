@@ -8,35 +8,9 @@ var express = require('express')
   , user = require('./routes/user')
   , http = require('http')
   , ct = require('./routes/tb')
-  // , Sequelize = require('sequelize')
   , path = require('path');
 
 var app = express();
-
-
-
-// var project = Project.build({
-//   title: 'my awesome project',
-//   description: 'woo,fuckfuck', 
-// });
-
-// project
-//   .save()
-//   .success(function () {
-//     console.log('fuck suc');
-//   });
-
-// var task = Task.build({
-//   title: 'my awesome project',
-//   description: 'woo,fuckfuck', 
-//   deadline: new Date()
-// });
-
-// task
-//   .save()
-//   .success(function () {
-//     console.log('fuck suc too!');
-//   });
 
 app.configure(function(){
   app.set('port', process.env.PORT || 3000);

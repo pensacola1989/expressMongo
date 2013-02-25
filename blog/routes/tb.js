@@ -1,56 +1,5 @@
 var  Sequelize = require('sequelize');
 
-// exports.createTable = function (req,res) {
-		
-// 	var sequelize = new Sequelize('test', 'root', '');
-
-// 	var Project = sequelize.define('Project',{
-// 	  title : Sequelize.STRING,
-// 	  description : Sequelize.TEXT
-// 	});
-
-// 	var Task = sequelize.define('Task',{
-// 	  title: Sequelize.STRING,
-// 	  description: Sequelize.TEXT,
-// 	  deadline: Sequelize.DATE
-// 	});
-
-// 	Project.sync();
-// 	Task.sync();
-
-// 	Project.drop();
-// 	Task.drop();	
-
-// 	sequelize.sync().success(function() {
-// 	  res.send('createTable ok!');
-// 	}).error(function(error) {
-// 	  res.send('createTable falied!');
-// 	});
-// }
-
-
-// var project = Project.build({
-//   title: 'my awesome project',
-//   description: 'woo,fuckfuck', 
-// });
-
-// project
-//   .save()
-//   .success(function () {
-//     console.log('fuck suc');
-//   });
-
-// var task = Task.build({
-//   title: 'my awesome project',
-//   description: 'woo,fuckfuck', 
-//   deadline: new Date()
-// });
-
-// task
-//   .save()
-//   .success(function () {
-//     console.log('fuck suc too!');
-//   });
 
 exports.createTable = function (req,res) {
 	var sequelize = new Sequelize('fuck','root','');
